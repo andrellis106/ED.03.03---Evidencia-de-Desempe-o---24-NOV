@@ -1,0 +1,4 @@
+# Nunca subir el token
+.streamlit/secrets.toml
+__pycache__/
+.venv/

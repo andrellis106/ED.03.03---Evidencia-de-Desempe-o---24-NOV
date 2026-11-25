@@ -1,84 +1,31 @@
-# ED.03.03 – Evidencia de Desempeño: Dashboard en Streamlit
+# Dashboard Banxico con Streamlit
 
-**Matrícula:** 124050194
-**Materia:** Manejo Masivo de Datos (Big Data)
+ED.03.03 – Herramientas de Visualización (IDIA221-4)
 
-## Descripción
+Dashboard que consume la **API SIE de Banxico** y transforma sus datos en indicadores y gráficas interactivas:
 
-Este proyecto toma la API desarrollada en el examen del segundo parcial (repositorio `examen-p2-124050194`) y transforma sus resultados en un **dashboard interactivo hecho con Streamlit**.
-
-La API expone los resultados del pipeline contenerizado (Docker + Hadoop MapReduce + base de datos), que responde a la pregunta:
-
-> **¿Cuántas unidades se vendieron por método de pago y día de la semana?**
-
-El dashboard consume esos datos desde la API y los muestra en tablas, gráficas y filtros.
-
-## Arquitectura
-
-```
-Dataset (CSV) → Hadoop MapReduce → Base de datos → API → Dashboard Streamlit
-```
-
-## Funcionalidades del dashboard
-
-- Consulta de datos en tiempo real desde la API
-- Tabla con unidades vendidas por método de pago y día de la semana
-- Gráfica de barras por método de pago
-- Gráfica por día de la semana
-- Filtros por método de pago y día
-- Indicadores (KPIs): total de unidades, método más usado, día con más ventas
-
-## Tecnologías
-
-- Python 3
-- Streamlit
-- Pandas
-- Requests
-- Docker / Docker Compose
-- Hadoop 3.3.6 (MapReduce)
-
-## Estructura del repositorio
-
-```
-├── app.py               # Dashboard en Streamlit
-├── requirements.txt     # Dependencias de Python
-├── evidencias/          # Capturas y videos del funcionamiento
-└── README.md
-```
+- Tipo de cambio FIX (serie `SF43718`) con media móvil ajustable
+- Tasa de interés objetivo (serie `SF61745`)
+- Inflación anual calculada a partir del INPC (serie `SP1`)
+- Promedio mensual del tipo de cambio
+- Tabla de datos y descarga en CSV
 
 ## Cómo ejecutarlo
 
-1. Levantar la API del examen (desde el repo `examen-p2-124050194`):
-
-   ```bash
-   docker compose up -d
+1. Instalar dependencias:
    ```
-
-2. Instalar dependencias del dashboard:
-
-   ```bash
    pip install -r requirements.txt
    ```
-
-3. Ejecutar el dashboard:
-
-   ```bash
-   streamlit run app.py
+2. Obtener un token en https://www.banxico.org.mx/SieAPIRest/service/v1/token
+3. Crear el archivo `.streamlit/secrets.toml` con:
    ```
-
-4. Abrir en el navegador: `http://localhost:8501`
+   BANXICO_TOKEN = "tu_token"
+   ```
+4. Ejecutar:
+   ```
+   streamlit run dashboard.py
+   ```
 
 ## Evidencias
 
-Las capturas y videos del funcionamiento están en la carpeta [`evidencias/`](evidencias/).
-
-| Evidencia | Descripción |
-|---|---|
-| `evidencias/01_api.png` | API funcionando y respondiendo datos |
-| `evidencias/02_dashboard.png` | Vista general del dashboard |
-| `evidencias/03_filtros.png` | Uso de filtros |
-| `evidencias/demo.mp4` | Video del funcionamiento completo |
-
-## Autor
-
-Matrícula 124050194
+Las capturas o el video del funcionamiento están en la carpeta `evidencias/`.
